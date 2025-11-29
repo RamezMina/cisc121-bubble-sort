@@ -90,12 +90,13 @@ Some patterns I noticed in Bubble Sort:
 
 
 # How to Run the App (Locally)
+pip install gradio
 
 1. Install required packages:
   
-2. Run the program:
+3. Run the program:
 
-3. Gradio will open a local link in your browser.
+4. Gradio will open a local link in your browser.
 
    
 # Hugging Face Deployment
@@ -109,11 +110,11 @@ https://huggingface.co/spaces/RamezMina/cisc121-bubble-sort
 
 I tested the app with several cases:
 
-- **Already sorted list:** `1,2,3,4`  
-- **Reverse sorted list:** `9,8,7,6`  
-- **Random list**  
-- **Duplicates:** `5,5,2,9`  
-- **Invalid input:** letters or symbols → correctly shows an error message  
+- Already sorted list: `1,2,3,4`  
+- Reverse sorted list: `9,8,7,6`  
+- Random list 
+- Duplicates: `5,5,2,9`  
+- Invalid input: letters or symbols → correctly shows an error message  
 
 Screenshots of two tests are included above.
 

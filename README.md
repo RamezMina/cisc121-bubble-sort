@@ -8,10 +8,10 @@ The user types a list of integers, and the app shows each comparison and swap st
 ## Demo Screenshots
 
 ### TEST 1
-![Screenshot 1](screenshot1.png)
+![Screenshot 1](screenshot1.png.png)
 
 ### TEST 2
-![Screenshot 2](screenshot2.png)
+![Screenshot 2](screenshot2.png.png)
 
 ---
 

@@ -1,12 +1,12 @@
 # Bubble Sort Visual Simulation (CISC 121 Project)
 
-This is my small Python app for the CISC 121 final project.  
-I chose **Bubble Sort** because it's one of the first algorithms we learned, and it is easy to show step-by-step.  
-The program takes a list of integers and shows every comparison and swap using a simple Gradio interface.
+This is a small Python app that visually simulates **Bubble Sort** using **Gradio**.  
+The user types a list of integers, and the app shows each comparison and swap step-by-step.
 
 ---
 
-## Demo Screenshot
+## Demo Screenshots
+
 ### First test
 ![Screenshot 1](screenshot1.png)
 
@@ -15,96 +15,80 @@ The program takes a list of integers and shows every comparison and swap using a
 
 ---
 
-# Problem Breakdown & Computational Thinking
+## 1. Problem Breakdown & Computational Thinking
 
-### 1. **Decomposition**
-Bubble sort can be broken into these small parts:
-- Look at two numbers beside each other
-- Compare them
-- If the first one is bigger, swap them
-- Keep looping through the list until everything is sorted
-- Show each step to the user in the GUI
+### 1.1 Decomposition
 
-### 2. **Pattern Recognition**
-- The algorithm repeatedly compares pairs of values
-- The biggest values “bubble up” to the end of the list
-- The same pattern repeats inside nested loops
+I broke the project into these smaller pieces:
 
-### 3. **Abstraction**
-To keep the app simple, I only show:
-- The pair being compared
-- Whether a swap happened
-- The array after each update
+- **Input handling**  
+  - Read a string from the Gradio textbox (ex: `"5,3,8,1"`).  
+  - Split by commas and convert each piece to an `int`.
 
-I do **not** show:
-- Internal loop counters  
-- Memory addresses  
-- Python internal mechanics  
+- **Bubble sort logic**  
+  - Use two loops (`i` and `j`).  
+  - Compare neighbouring elements `arr[j]` and `arr[j+1]`.  
+  - Swap if they are in the wrong order.
 
-### 4. **Algorithm Design**
-**Input:** a string of comma-separated integers  
-**Processing:** bubble sort with recorded steps  
-**Output:** a list of text steps displayed in order  
+- **Recording steps**  
+  - Keep a `steps` list of strings.  
+  - Add messages like `"Comparing 5 and 3"`, `"Swapped → [3, 5, 8, 1]"`, etc.  
+  - At the end, join all steps into one big string for display.
 
-**Flowchart (simple):**
+- **User interface (Gradio)**  
+  - One textbox for input numbers.  
+  - One textbox for all the steps.  
+  - One button that runs `bubble_sort_steps(...)` when clicked.
 
-Start
-↓
-User enters numbers
-↓
-Convert text → list of ints
-↓
-For i in range(n):
-For j in range(n-i-1):
-Compare arr[j] and arr[j+1]
-If arr[j] > arr[j+1] → swap
-Record step
-↓
-Show final sorted list
-↓
-End
+### 1.2 Pattern Recognition
 
+Some patterns I noticed in Bubble Sort:
 
----
+- On every **pass** of the outer loop, the largest remaining value moves to the right.
+- I always compare **neighbouring elements** (`j` and `j+1`).
+- The inner loop gets **shorter each pass** (`n - i - 1`) because the last part of the list is already sorted.
+- The same compare → maybe swap → move on pattern repeats until the list is sorted.
 
-# Steps to Run (Local)
+### 1.3 Abstraction
 
-1. Install requirements:
+To keep things simple for the user:
 
+- I only show:
+  - The current array
+  - Which two numbers are being compared
+  - Whether they were swapped or not
+- I hide the low-level details like:
+  - Exact values of `i` and `j`
+  - How Python manages memory or the call stack
+- The UI just asks for:
+  - A comma-separated list of integers  
+    (no need to understand loops or indices to use it).
 
-pip install -r requirements.txt
+### 1.4 Algorithm Design
 
+High-level algorithm for my app:
 
-2. Run:
-
-
-python app.py
-
-
-3. Gradio will open a local link in your browser.
-
----
-
-# Hugging Face Link
-*(Add your Hugging Face Space link here after you deploy it)*
-
----
-
-# Testing & Verification
-
-I tested my app using:
-- An already sorted list: `1,2,3,4`
-- Reverse order: `9,8,7,6`
-- Random lists
-- Repeated values: `5,5,2,9`
-- Bad input (like letters) → correctly shows an error message
-
-Screenshots of tests are included in the repo.
+1. **User input**: get a string from the textbox (ex: `"5,3,8,1"`).
+2. **Parse input**: split by `","` and try to convert to integers.
+   - If this fails, return an error message.
+3. **Initialize**:
+   - Save the starting array in `steps` as `"Start: [ ... ]"`.
+4. **Bubble Sort loops**:
+   - For each `i` from `0` to `n-1`:
+     - For each `j` from `0` to `n-i-2`:
+       - Record `"Comparing a and b"`.
+       - If `arr[j] > arr[j+1]`:
+         - Swap the two values.
+         - Record `"Swapped → [new array]"`.
+       - Else:
+         - Record `"No swap → [array]"`.
+5. **Finish**:
+   - Record `"Finished: [sorted array]"`.
+   - Join all strings in `steps` with newlines and return that string.
+6. **Gradio**:
+   - Show the result string in a multiline textbox.
 
 ---
 
-# Author & Acknowledgment
-
-Made by **Ramez Mina**, Queen’s University, CISC 121.  
-AI (ChatGPT) was used at Level 4 for help with formatting and debugging,  
-but all logic and code was written by me.
+## 2. Flowchart
+![flowchart](flowchart.png.png)
